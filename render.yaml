@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: local-services-app # Your web service name
+    env: python
+    buildCommand: "python -m pip install -r requirements.txt && python manage.py collectstatic --noinput"
+    startCommand: "gunicorn services.wsgi:application"
+    rootDir: "."
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: local-services-db # Name of your PostgreSQL database on Render
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 1
+      - key: DEBUG
+        value: "False"
+    healthCheckPath: /admin/login/
+    autoDeploy: true
