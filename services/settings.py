@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os # New import for SECRET_KEY
+import dj_database_url # New import for database configuration
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-n2b60-=rd0@7t-t@b+r9_1ci6c_5^1w7fd3aroo_y)&el=nhcs'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-n2b60-=rd0@7t-t@b+r9_1ci6c_5^1w7fd3aroo_y)&el=nhcs') # Read from environment variable
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False # Changed to False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.render.com', 'your-render-app-name.onrender.com'] # Updated for Render.com
 
 
 # Application definition
@@ -90,14 +92,10 @@ WSGI_APPLICATION = 'services.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'local_service_db',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3307',
-    }
+    'default': dj_database_url.config(
+        default='sqlite:///local_service_db', # Fallback for local development
+        conn_max_age=600
+    )
 }
 
 
@@ -136,6 +134,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles' # New: for collecting static files in production
 
 # Media files
 MEDIA_URL = '/media/'
