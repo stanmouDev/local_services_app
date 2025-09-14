@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services Marketplace</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'index' %}">
+                <img src="https://cdn-icons-png.flaticon.com/512/306/306004.png" alt="Services Marketplace Logo" width="30" height="30" class="d-inline-block align-text-top me-2">
+                <span class="fw-bold text-primary">Services Marketplace</span>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-primary fw-bold" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-primary fw-bold" href="{% url 'register' %}">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="jumbotron">
+            <h1 class="display-4 text-center fw-bold">Welcome to the Services Marketplace!</h1>
+            <p class="lead text-center text-muted mb-4">Your trusted platform to connect with local experts for all your needs.</p>
+            <p class="lead">Find trusted local services like plumbers, electricians, tutors, and more.</p>
+            <hr class="my-4">
+            <p>Use the search bar below to find services in your area.</p>
+            <a class="btn btn-primary btn-lg" href="{% url 'service_list' %}" role="button">Browse Services</a>
+        </div>
+
+        <!-- Search Bar -->
+        <form action="{% url 'service_list' %}" method="GET" class="input-group mb-3">
+            <input type="text" name="q" class="form-control" placeholder="Search for services or providers..." aria-label="Search input" value="{{ query|default:'' }}">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+
+        <!-- Service Categories Placeholder -->
+        <h2 class="mt-5">Popular Categories</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Plumbing</h5>
+                        <p class="card-text">Find expert plumbers for all your needs.</p>
+                        <a href="#" class="btn btn-sm btn-outline-primary">View Services</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Electrical</h5>
+                        <p class="card-text">Certified electricians for safe installations and repairs.</p>
+                        <a href="#" class="btn btn-sm btn-outline-primary">View Services</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Tutoring</h5>
+                        <p class="card-text">Connect with experienced tutors for various subjects.</p>
+                        <a href="#" class="btn btn-sm btn-outline-primary">View Services</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="text-center p-3" style="background-color: var(--darker-gold);">
+            Built and designed by stanmoudev
+        </div>
+    </footer>
+</body>
+</html>
