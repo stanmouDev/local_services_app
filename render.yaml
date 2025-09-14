@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: local-services-app # Your web service name
+    name: stanmoudev-service-hub # Updated web service name
     env: python
     buildCommand: "python -m pip install -r requirements.txt && python manage.py collectstatic --noinput"
     startCommand: "gunicorn services.wsgi:application"
@@ -8,7 +8,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: local-services-db # Name of your PostgreSQL database on Render
+          name: local-services-db # Ensure this EXACTLY matches the name of your PostgreSQL database on Render
       - key: SECRET_KEY
         generateValue: true
       - key: WEB_CONCURRENCY
